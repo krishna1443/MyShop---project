@@ -1,0 +1,27 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.sidebar{
+    width:25%;
+    background-color: rgb(255, 0, 0);
+}
+.main-container{
+    width:100%
+}
+.content{
+    width: calc(100%-25%);
+    /* background-color:rgb(72, 9, 247); */
+    padding-top: 10px;
+     margin-left:2%;  
+    list-style-position: inside;
+}
+input{
+    width: 100%; 
+    margin: 8px 0;
+}
+tr,th{
+    border:1px double black;
+}
+

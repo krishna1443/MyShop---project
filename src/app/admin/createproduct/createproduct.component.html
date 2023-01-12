@@ -1,0 +1,247 @@
+<!-- Template Driven Form validation 
+Find the below classes where we can use validation based on state change
+1. ng-touched:Control Visit State.
+2. ng-untouched:Control Not Visit State.
+3. ng-dirty: Control Value has been changed.
+4. ng-pristine: Control Value have not been changed.
+5. ng-valid: Control Values Are Valid.
+5. ng-invalid: Control Values Are inValid.  -->
+<div class="main">
+    <div class="sidebar">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="main-container">
+        <div class="content col-lg-6">
+            <h4>{{ title }}</h4>
+            <form #basicForm="ngForm" (ngSubmit)="getData(basicForm.value)">
+                <label for="productids" class="form-label">Product Id:</label>
+                <input type="number" ngModel name="Id" id="productids" placeholder="Enter Product Id"><br />
+                <label for="productnames">Product Name:</label>
+                <input type="text" ngModel name="Name" id="productnames" placeholder="Enter Product Name"><br />
+                <label for="productcategorys">Product Category:</label>
+                <input type="text" ngModel name="Category" id="productcategorys"
+                    placeholder="Enter Product Category"><br />
+                <label for="createdat">Created At: </label>
+                <input type="date" ngModel name="CreatedAt" id="createdat" placeholder="Enter Product"><br />
+                <button class="btn btn-primary"> createproduct</button>
+            </form>
+            <ul>
+                <li>{{ productData.Id}}</li>
+                <li>{{ productData.Name}}</li>
+                <li>{{ productData.Category}}</li>
+                <li>{{ productData.CreatedAt}}</li>
+            </ul>
+        </div>
+        <div class="content col-lg-6">
+            <h4>{{ title2}}</h4>
+            <form #loginForm="ngForm" (ngSubmit)="loginUser(loginForm.value)">
+                <!-- <input type="email" required  #name="ngModel" name="Email" pattern="[a-zA-Z]+$" placeholder="Enter Your Email" ngModel><br/> -->
+                <input type="email" required #name="ngModel" name="Email" email placeholder="Enter Your Email"
+                    ngModel><br />
+                <span *ngIf="name.invalid && name.touched" style="color:rgb(252, 11, 11)">Please enter a valid input
+                </span><br />
+                <input type="password" minlength='3' required name="Password" #password="ngModel"
+                    placeholder="Enter Password" ngModel><br />
+                <span *ngIf="password.invalid && password.touched " style="color:#a0fc0b">Please enter a valid input
+                </span><br />
+                <button class="btn btn-success" [disabled]="loginForm.invalid">Login</button>
+            </form>
+            <table>
+                <tr>
+                    <th>Email</th>
+                    <th>Password</th>
+                </tr>
+                <tr>
+                    <td>{{loginData.Email }}</td>
+                    <td>{{ loginData.Password}}</td>
+                </tr>
+            </table>
+        </div>
+        <!-- Reactive Forms in angular -->
+        <div class="content col-lg-4" id="clickme">
+            <h4>{{ title3 }}</h4>
+            <!-- <form [formGroup]="RegisterForm" (ngSubmit)="RegisterUser()">
+                <input type="text" name="UserName" placeholder="Enter Your Name" formControlName="UserName"><br />
+                <input type="password"  name="Password" placeholder="Enter Password" formControlName="Password"><br />
+                <button class="btn btn-success">UserRegister</button>
+            </form> -->
+            <form [formGroup]="RegisterForm">
+                <div>
+                    <label>Mobile:</label>
+                    <input type="number" placeholder="Enter Your Name" formControlName="Mobile"
+                        [(ngModel)]="Mobilenumber"><br />
+                    <div class="from-text text-danger"
+                        *ngIf="Mobile.errors?.['required'] && (Mobile.touched || Mobile.dirty)">
+                        Mobile is Required.
+                    </div>
+                </div>
+                <div>
+                    <label>UserName</label>
+                    <!-- <input type="text" value="{{Mobilenumber}}" placeholder="Enter Your Name" formControlName="UserName" readonly><br /> -->
+                    <input type="text" placeholder="Enter Your Name" formControlName="UserName"><br />
+                    <div class="from-text text-danger"
+                        *ngIf="UserName.errors?.['required'] && (UserName.touched || UserName.dirty)">
+                        User Name is Required.
+                    </div>
+                    <div class="from-text text-danger"
+                        *ngIf="UserName.errors?.['minlength'] && (UserName.touched || UserName.dirty)">
+                        User Name is tooshort.
+                    </div>
+                    <div class="from-text text-danger"
+                        *ngIf="UserName.errors?.['pattern'] && (UserName.touched || UserName.dirty)">
+                        User Name should start with Alphabet.
+                    </div>
+                </div>
+                <div>
+                    <label>password:</label>
+                    <input type="password" placeholder="Enter Password" formControlName="Password"><br />
+                    <div class="from-text text-danger"
+                        *ngIf="Password.errors?.['required'] && (Password.touched || Password.dirty)">
+                        password is Required.
+                    </div>
+                    <div class="from-text text-danger"
+                        *ngIf="(Password.errors?.['minlength'] || Password.errors?.['maxlength'] )&& (Password.touched || Password.dirty)">
+                        password should be al least 6 and at the max 15 characters long.
+                    </div>
+                </div>
+                <div>
+                    <label>Email:</label>
+                    <input type="email" placeholder="Enter Your Email" formControlName="Email"><br />
+                    <div class="from-text text-danger"
+                        *ngIf="Email.errors?.['required']  && ( Email.touched || Email.dirty)">
+                        Email is Required
+                    </div>
+                    <div class="from-text text-danger"
+                        *ngIf="Email.errors?.['email'] && ( Email.touched || Email.dirty)">
+                        Email is Invalid.
+                    </div>
+                </div>
+                <div formGroupName="Name">
+                    <P>Name:</P>
+                    <div>
+                        <label>FirstName:</label>
+                        <input type="text" placeholder="Enter Your FirstName" formControlName="firstName"><br />
+                        <div class="from-text text-danger"
+                            *ngIf="firstName.errors?.['required']  && ( firstName.touched || firstName.dirty)">
+                            FirstName is Required
+                        </div>
+                    </div>
+                    <div>
+                        <label>LastName:</label>
+                        <input type="text" placeholder="Enter Your LastName" formControlName="lastName"><br />
+                        <div class="from-text text-danger"
+                            *ngIf="lastName.errors?.['required']  && ( lastName.touched || lastName.dirty)">
+                            LastName is Required.
+                        </div>
+                    </div>
+                </div>
+                <div formGroupName="address">
+                    <div>
+                        <label for="cities">City:</label>
+                        <select id="cities" formControlName="city">
+                            <option *ngFor="let cities of data2">{{cities.name}}</option>
+                            <!--<option value="Mumbai">Mumbai</option>
+                            <option value="Bangalore">Bangalore</option>
+                            <option value="Pune">Pune</option> -->
+                        </select>
+                        <br />
+                        <div class="from-text text-danger"
+                            *ngIf="city.errors?.['required']  && ( city.touched || city.dirty)">
+                            City is Required.
+                        </div>
+                    </div>
+                    <div>
+                        <label>Street:</label>
+                        <input type="text" placeholder="Enter Street" formControlName="street"><br />
+                        <div class="from-text text-danger"
+                            *ngIf="street.errors?.['required']  && ( street.touched || street.dirty)">
+                            Street is Required.
+                        </div>
+                    </div>
+                    <div>
+                        <label>Number:</label>
+                        <input type="number" placeholder="Enter Number" formControlName="number"><br />
+                        <div class="from-text text-danger"
+                            *ngIf="number.errors?.['required']  && ( number.touched || number.dirty)">
+                            Number is Required.
+                        </div>
+                    </div>
+                    <div>
+                        <label>Zipcode:</label>
+                        <input type="number" placeholder="Enter Zipcodenumber" formControlName="zipcode"><br />
+                        <div class="from-text text-danger"
+                            *ngIf="zipcode.errors?.['required']  && ( zipcode.touched || zipcode.dirty)">
+                            Zipcode is Required.
+                        </div>
+                    </div>
+                    <div formGroupName="geolocation">
+                        <div>
+                            <label>Latitude:</label>
+                            <input type="number" placeholder="Latitude number" formControlName="lat"><br />
+                            <div class="from-text text-danger"
+                                *ngIf="lat.errors?.['required']  && (lat.touched || lat.dirty)">
+                                Latitude number is Required.
+                            </div>
+                        </div>
+                        <div>
+                            <label>Longitude:</label>
+                            <input type="number" placeholder="Longitude location" formControlName="long"><br />
+                            <div class="from-text text-danger"
+                                *ngIf="long.errors?.['required']  && (long.touched || long.dirty)">
+                                Longitude Location is Required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label>Phone Number:</label>
+                    <input type="number" placeholder="Enter Phone-number" formControlName="Phone"><br />
+                    <div class="from-text text-danger"
+                        *ngIf="Phone.errors?.['required']  && (Phone.touched || Phone.dirty)">
+                        phone number is Required.
+                    </div>
+                </div>
+                <button class="btn btn-success" (click)="RegisterUser(mymodal)">UserRegister</button>
+            </form>
+        </div>
+        <form (ngSubmit)="open(mymodal)"></form>
+        <h1>Angular 14 Bootstrap Modal Popup Example</h1>
+        <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Open My Modal</button>
+
+        <ng-template #mymodal let-modal>
+            <!-- <div class="modal-header" style="background-color:lightgray;color:black"> -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Error</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        <span aria-hidden="true">×</span>
+                    </button>
+            </div>
+            <div class="modal-body">
+                <label> Required fields must be filled!</label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+<!-- <h1>Angular 14 Bootstrap Modal Popup Example</h1>
+   
+<button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Open My Modal</button>
+   
+<ng-template #mymodal let-modal>
+  <div class="modal-header" style="background-color:lightgray;color:black">
+    <h4 class="modal-title" id="modal-basic-title">Error
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+    </h4>
+  </div>
+  <div class="modal-body">
+  <label> Required fields must be filled!</label>
+  </div>
+  <div class="modal-footer" style="background-color:white;color:red">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+  </div>
+</ng-template> -->

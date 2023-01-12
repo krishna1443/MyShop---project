@@ -1,0 +1,75 @@
+<p>carts works!</p>
+<!--(A) 1)Interpolation refers to embedding expressions into marked up text. By default, interpolation uses the double curly braces {{ and }} as delimiters. Angular replaces currentCustomer with the string value of the corresponding component property.
+2)In Angular, String interpolation is used to display dynamic data on HTML template (at user end). It facilitates you to make changes on component. ts file and fetch data from there to HTML template (component. html file). 
+ interpolation string ya numeric value ko hi except kerta h boolean value ko nhi krta h.
+<input type="text" name="user-name" value= {{name}} > - interpolation(used databinding)<br/> -->
+<!-- <input type="text" name="user-name" value= {{name}} disabled = {{disabled}} > - interpolation(used databinding)<br/>  -->
+
+
+<!--(B)  Binding to a property
+To bind to an element's property, enclose it in square brackets, [], which identifies the property as a target property. 
+A target property is the DOM property to which you want to assign a value.
+To assign a value to a target property for the image element's src property, type the following code:
+property binding string ,numeric vaue , boolean value ko except krta h
+<img alt="item" [src]="itemImageUrl"><br/>  --->
+<!-- <input type="text" name="user-name" [value] = name [disabled]= disabled > - property binding(used databinding)<br/> -->
+
+<!-- (c) ngModel in angular used databinding:
+two types databinding:
+1)one way binding: [ngModel]="binding" ->  html component to view(ts) component
+2)two way binding:[(ngModel)]="binding" -> html component to view component and view component to html component -->
+<!-- same time pr ek hi property ko update and display k liye ngModel use hota h -->
+<!-- <input type="text" [(ngModel)] ='modelname' >
+<p>{{modelname}}</p>
+ -->
+
+<div class="main">
+  <div>
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="main-container">
+    <!-- <div class="header">
+            <app-admin-header></app-admin-header> 
+        </div> -->
+    <div class="card-inner">
+
+      <div class="card-wrapper" *ngFor="let cart of carts; index as i">
+        <div class="card">
+          <div class="card-body">
+            <!-- <img class="card-img-top" src="../assets/images/dummy-01.png" alt="Card image cap"> -->
+            <p><span class="content">id:</span>{{cart.id}}</p>
+            <p><span class="content">userId:</span>{{cart.userId}}</p>
+            <p><span class="content"> date:</span>{{cart.date | date:'medium'}}</p>
+            <!-- <button type="button" class="btn btn-primary" (click)="showModal(i)" data-bs-toggle="modal" -->
+            <button type="button" class="btn btn-primary" (click)="showModal(cart.products)" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">
+              <!-- <button type="button" class="btn btn-primary"  (click)="showModal(carts[i])" data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
+              View {{cart.products.length}} Products
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">carts title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- <div class="modal-body" *ngFor="let product of selectedcart ? selectedcart.products : []">  -->
+      <div class="modal-body" *ngFor="let product of selectedcart">
+        <p><span class="content" id="selectedIdid">productId:</span>{{product.productId}}</p>
+        <p><span class="content" id="selectedUserid">quantity:{{product.quantity}}</span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

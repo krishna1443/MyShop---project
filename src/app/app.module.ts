@@ -3,14 +3,36 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { AdminModule } from "./admin/admin.module";
+import { ShopComponent } from './shop/shop.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from "@angular/forms";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { SpaceobservableComponent } from './spaceobservable/spaceobservable.component';
+
+// import { UsersDataService } from "./services/users-data.service";
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    HeaderComponent,
+    FooterComponent,
+    ShopComponent,
+    SpaceobservableComponent,
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AdminModule,
+    HttpClientModule,
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

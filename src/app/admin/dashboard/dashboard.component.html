@@ -1,0 +1,26 @@
+<div class="main">
+    <div>
+        <app-sidebar></app-sidebar> 
+    </div>
+    <div class="main-container">
+        <div class="header">
+            <app-admin-header (myoutput)="getdata($event)" (myoutput2)="ascenDdata($event)"></app-admin-header> 
+            <!-- <app-admin-header></app-admin-header> -->
+        </div>
+        <div class="card-inner">
+                <div class="card-wrapper" *ngFor="let product of productdata">
+                    <div class="card" >
+                        <div class="card-body">
+                            <img class="card-img-top" src="../assets/images/pexels-jaime-reimer-2662116.jpg" alt="Card image cap">
+                            <p><span class="content">id:</span>{{product.id}}</p>  
+                            <p><span class="content" >title:</span>{{product.title}}</p>
+                            <p><span class="content">category:</span>{{product.category}}</p>
+                            <p><span class="content">description:</span>{{product.description}}</p>
+                            <a routerLink="/">ProductList</a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div> 
+</div>   
+
