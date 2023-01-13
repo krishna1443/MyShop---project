@@ -9,9 +9,10 @@ import { FooterComponent } from './shared/components/footer/footer.component';
 import { AdminModule } from "./admin/admin.module";
 import { ShopComponent } from './shop/shop.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from "@angular/forms";
+import { FormsModule,ReactiveFormsModule } from "@angular/forms";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SpaceobservableComponent } from './spaceobservable/spaceobservable.component';
+import { LoginComponent } from './login/login.component';
 
 // import { UsersDataService } from "./services/users-data.service";
 
@@ -24,6 +25,7 @@ import { SpaceobservableComponent } from './spaceobservable/spaceobservable.comp
     FooterComponent,
     ShopComponent,
     SpaceobservableComponent,
+    LoginComponent,
     
   ],
   imports: [
@@ -32,7 +34,8 @@ import { SpaceobservableComponent } from './spaceobservable/spaceobservable.comp
     AdminModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
