@@ -124,6 +124,7 @@ export class CreateproductComponent {
   get Password(): FormControl {
     return this.RegisterForm.get('Password') as FormControl;
   }
+  
   get Email(): FormControl {
     return this.RegisterForm.get('Email') as FormControl;
   }

@@ -8,12 +8,13 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { AdminModule } from "./admin/admin.module";
 import { ShopComponent } from './shop/shop.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from "@angular/forms";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SpaceobservableComponent } from './spaceobservable/spaceobservable.component';
 import { LoginComponent } from './login/login.component';
-
+import { LoggerInterceptor } from "./services/logger_intercepter";
+import { TokensInterceptor } from "./services/add_header.interceptor";
 // import { UsersDataService } from "./services/users-data.service";
 
 
@@ -37,7 +38,12 @@ import { LoginComponent } from './login/login.component';
     NgbModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    {provide : HTTP_INTERCEPTORS, useClass : LoggerInterceptor, multi: true},
+    {provide : HTTP_INTERCEPTORS, useClass : TokensInterceptor, multi: true}
+    // {provide : HTTP_INTERCEPTORS, useClass : AddHeaderInterceptor, multi: true}
+  ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

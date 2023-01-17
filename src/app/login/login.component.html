@@ -19,17 +19,17 @@
   
                     <div class="form-outline mb-4">
                       <input type="email"  id="form2Example11" class="form-control"
-                        placeholder="Phone number or email address" required formControlName="Username" />
+                        placeholder="Phone number or email address" required formControlName="userName" />
                         <div class="from-text text-danger"
-                        *ngIf="Username.errors?.['required'] && (Username.touched || Username.dirty)">
-                        UserName is Required.
+                        *ngIf="userName.errors?.['required'] && (userName.touched || userName.dirty)">
+                        userName is Required.
                         </div>
                     </div>
   
                     <div class="form-outline mb-4">
-                      <input type="password" id="form2Example22" class="form-control"  placeholder="Enter Password" formControlName="Password" />
+                      <input type="password" id="form2Example22" class="form-control"  placeholder="Enter Password" formControlName="password" />
                       <div class="from-text text-danger"
-                        *ngIf="Password.errors?.['required'] && (Password.touched || Password.dirty)">
+                        *ngIf="password.errors?.['required'] && (password.touched || password.dirty)">
                         password is Required.
                     </div>
                     </div>
@@ -63,3 +63,4 @@
       </div>
     </div>
   </section>
+  
